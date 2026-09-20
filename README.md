@@ -90,23 +90,69 @@ docs/
 
 ## Running it locally
 
-Ubuntu/Debian blocks system-wide `pip install` (PEP 668), so use a virtual
-environment:
+All three platforms follow the same four steps — clone, create a virtual
+environment, install, run — only the *command* to activate the environment
+differs. Use the block for your OS.
+
+First, on any platform:
 
 ```bash
 git clone <this-repo-url>
 cd <repo-folder>
+```
 
+### macOS / Linux
+
+Ubuntu and Debian additionally block a system-wide `pip install` (PEP 668,
+the `externally-managed-environment` error) — a virtual environment is the
+intended fix there too, so this same block works either way.
+
+```bash
 python3 -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 pip install -r requirements.txt
 
 python3 load_sites.py          # builds pep.db from sites_demo.csv
 python3 app.py                 # -> http://127.0.0.1:5000
 ```
 
-Open `http://127.0.0.1:5000` and pick a region. `/boston` and `/mexico` also
-work directly.
+### Windows (PowerShell)
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+python load_sites.py
+python app.py
+```
+
+If `Activate.ps1` is blocked by the execution policy, run PowerShell as
+administrator once and allow local scripts:
+`Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, then try again.
+
+### Windows (Command Prompt / cmd.exe)
+
+```bat
+py -m venv .venv
+.venv\Scripts\activate.bat
+pip install -r requirements.txt
+
+python load_sites.py
+python app.py
+```
+
+---
+
+You'll know the virtual environment is active when the prompt is prefixed
+with `(.venv)`. From then on, `python` (or `python3` on macOS/Linux) refers
+to the interpreter inside `.venv`, not the system one — that's what keeps
+Flask and its dependencies isolated from everything else on the machine.
+Close the terminal and you'll need to reactivate it (`source .venv/bin/activate`
+or the Windows equivalent) next time; `deactivate` exits it manually.
+
+Once `app.py` is running, open `http://127.0.0.1:5000` and pick a region.
+`/boston` and `/mexico` also work directly.
 
 ### Running the tests
 
