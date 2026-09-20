@@ -1,5 +1,5 @@
 """
-PEP finder - Flask shell for two regional modules.
+RushCare HIV - Flask shell for two regional modules.
 
     pip install flask
     python app.py          ->  http://127.0.0.1:5000

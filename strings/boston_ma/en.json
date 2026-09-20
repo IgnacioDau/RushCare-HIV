@@ -27,12 +27,12 @@
     "assault_no_police": "You do not have to report to the police to get medical care. That decision is yours and you can make it later.",
     "assault_barcc": "Boston Area Rape Crisis Center — 800-841-8371, 24 hours. They can meet you at the hospital.",
     "assault_rainn": "RAINN national hotline — 800-656-4673.",
-    "assault_continue": "Continue to the PEP finder anyway",
+    "assault_continue": "Continue to RushCare HIV anyway",
     "occupational_title": "Your employer is required to cover this",
     "occupational_body": "For a needlestick or other exposure at work, federal OSHA rules require your employer to provide evaluation and PEP at no cost to you.",
     "occupational_step": "Contact your occupational health or employee health department now. If it is after hours, go to your hospital's emergency room and say the exposure happened at work.",
     "occupational_note": "The 72-hour clock still applies. Do not wait for paperwork.",
-    "occupational_continue": "Continue to the PEP finder anyway"
+    "occupational_continue": "Continue to RushCare HIV anyway"
   },
   "out_of_window": {
     "title": "It has been more than 72 hours",

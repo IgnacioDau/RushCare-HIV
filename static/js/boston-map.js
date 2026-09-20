@@ -1,4 +1,6 @@
-/* Boston map: Leaflet + CARTO tiles, no API key.
+/* Boston map: Leaflet + plain OpenStreetMap tiles, no API key.
+ * (CARTO's free basemaps now require a key; OSM's standard tiles do not.
+ *  Dark mode is done with a CSS filter on the tile pane, not a second tileset.)
  *
  * Reuses the tile and pin styling of the Mexico module so both regions look
  * like one product. The Google path is not offered here: Boston's coordinates
@@ -33,11 +35,11 @@ const BostonMap = (() => {
   let tiles;
   function setTiles() {
     if (tiles) map.removeLayer(tiles);
-    const variant = isDark() ? 'dark_all' : 'light_all';
-    tiles = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${variant}/{z}/{x}/{y}{r}.png`, {
-      maxZoom: 19, subdomains: 'abcd',
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>'
+    tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    document.querySelector('.leaflet-tile-pane').classList.toggle('dark-tiles', isDark());
   }
 
   function pinIcon(n, cls) {

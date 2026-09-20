@@ -95,6 +95,9 @@ button,input{font:inherit;color:inherit}
 .gkey{bottom:12px}
 #map.leaflet-container{background:var(--sea);font-family:var(--f)}
 #map .leaflet-tile-pane{filter:sepia(.4) hue-rotate(228deg) saturate(1.3)}
+/* Plain OSM tiles are always light; in dark mode invert them first, then
+   reapply the same lilac tint so both themes share one look. */
+#map .leaflet-tile-pane.dark-tiles{filter:invert(92%) hue-rotate(180deg) brightness(.95) sepia(.3) hue-rotate(228deg) saturate(1.4)}
 .lpin-wrap{background:none;border:0}
 .lpin{width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-ink);border:2.5px solid var(--surface);display:grid;place-items:center;font:700 13px var(--f);box-shadow:0 2px 8px rgba(40,10,80,.35)}
 .lpin.first{background:var(--hot);color:#fff}
@@ -153,3 +156,6 @@ button,input{font:inherit;color:inherit}
 .sheet details{border-top:1px solid var(--line);padding-top:10px}
 .sheet summary{cursor:pointer;font-weight:700}
 .sheet details p{margin:8px 0 0;font-size:.9rem;color:var(--muted)}
+
+
+.top h1 .tagline{font-weight:400;color:var(--muted);font-size:.75em}

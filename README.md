@@ -1,4 +1,4 @@
-# PEP Finder — get PEP in time
+# RushCare HIV — get PEP in time
 
 A web app that helps someone who may have been exposed to HIV get **PEP**
 (post-exposure prophylaxis) inside the **72-hour window** in which it still

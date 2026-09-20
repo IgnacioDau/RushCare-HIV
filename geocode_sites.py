@@ -27,7 +27,7 @@ except ImportError:
     sys.exit("Missing dependency. Run:  pip install requests")
 
 ENDPOINT = "https://nominatim.openstreetmap.org/search"
-USER_AGENT = "PEP-Finder-HackMIT/1.0 (contact: CHANGE-ME@example.com)"  # <-- EDIT THIS
+USER_AGENT = "RushCareHIV-HackMIT/1.0 (contact: CHANGE-ME@example.com)"  # <-- EDIT THIS
 CACHE_PATH = ".geocode_cache.json"
 SLEEP_SECONDS = 1.1
 SAVE_EVERY = 20

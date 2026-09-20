@@ -117,7 +117,9 @@ const Geo = {
   geocode: q => MODE === 'google' ? GoogleGeo.geocode(q) : LeafletGeo.geocode(q),
   refine: items => MODE === 'google' ? GoogleGeo.refine(items) : LeafletGeo.refine(items)
 };
-/* ---------- Mapa de calles con Leaflet + OpenStreetMap/CARTO (sin clave) ---------- */
+/* ---------- Mapa de calles con Leaflet + OpenStreetMap (sin clave) ----------
+   CARTO dejó de ofrecer tiles gratis sin clave; OSM estándar sí sigue siendo gratis.
+   El modo oscuro se logra con un filtro CSS sobre el tile pane, no con otro set de tiles. */
 const LeafletImpl = (() => {
   let map, layer, tiles, markers = new Map(), lastS = null, ready = null;
   const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -133,8 +135,11 @@ const LeafletImpl = (() => {
   function setTiles() {
     if (tiles) map.removeLayer(tiles);
     const dark = isDark();
-    tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/' + (dark ? 'dark_all' : 'light_all') + '/{z}/{x}/{y}{r}.png', { maxZoom: 19, subdomains: 'abcd', attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>' }).addTo(map);
-    document.getElementById('map').classList.toggle('tint', !dark);
+    tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    document.getElementById('map').classList.toggle('tint', true);
+    document.querySelector('#map .leaflet-tile-pane').classList.toggle('dark-tiles', dark);
   }
   function pinIcon(n, cls) { return L.divIcon({ className: 'lpin-wrap', html: `<div class="lpin ${cls}">${n}</div>`, iconSize: [32, 32], iconAnchor: [16, 16] }); }
   function paint(s) {
