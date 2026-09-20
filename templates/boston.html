@@ -3,24 +3,35 @@
 {% block body %}
 <div class="app">
   <header class="top">
-    <a class="back" href="/">&larr; Change region</a>
+    <a class="back" href="/">&larr; {{ strings.nav.back }}</a>
     <h1>RushCare HIV <span class="tagline">— Boston</span></h1>
+    {% if languages|length > 1 %}
+    <nav class="langswitch" aria-label="Language">
+      {% for code, name in languages %}
+      <a href="?lang={{ code }}" {% if code == language %}aria-current="true"{% endif %}>{{ name }}</a>
+      {% endfor %}
+    </nav>
+    {% endif %}
     <div class="clock" id="clock" hidden></div>
   </header>
 
   <main class="panel" id="panel">
 
     <!-- 1. when -->
-    <section class="step" id="step-when" aria-labelledby="w1">
-      <h2 id="w1">When was the possible exposure?</h2>
-      <div class="chips" id="when" role="group" aria-label="Time of exposure">
-        <button class="chip" type="button" data-h="0.5" aria-pressed="false">Less than an hour ago</button>
-        <button class="chip" type="button" data-h="6" aria-pressed="false">Earlier today</button>
-        <button class="chip" type="button" data-h="24" aria-pressed="false">Yesterday</button>
-        <button class="chip" type="button" data-h="48" aria-pressed="false">Two days ago</button>
-        <button class="chip" type="button" data-h="90" aria-pressed="false">Three or more days ago</button>
+    <section class="step" id="step-when" aria-labelledby="w1"
+             data-step="when" data-summary="{{ strings.intake.when_summary }}" data-change="{{ strings.intake.change }}"
+             data-answered-by="#when .chip[aria-pressed='true']">
+      <h2 id="w1" tabindex="-1">{{ strings.intake.when_title }}</h2>
+      <div class="step-body">
+        <div class="chips" id="when" role="group" aria-label="{{ strings.intake.when_group_aria }}">
+          <button class="chip" type="button" data-h="0.5" aria-pressed="false">{{ strings.intake.when_lt1h }}</button>
+          <button class="chip" type="button" data-h="6" aria-pressed="false">{{ strings.intake.when_today }}</button>
+          <button class="chip" type="button" data-h="24" aria-pressed="false">{{ strings.intake.when_yesterday }}</button>
+          <button class="chip" type="button" data-h="48" aria-pressed="false">{{ strings.intake.when_2d }}</button>
+          <button class="chip" type="button" data-h="90" aria-pressed="false">{{ strings.intake.when_3d }}</button>
+        </div>
       </div>
-      <p class="status" id="when-msg" role="status">PEP only works within 72 hours. The sooner the better.</p>
+      <p class="status" id="when-msg" role="status">{{ strings.intake.when_note }}</p>
     </section>
 
     <!-- out of window -->
@@ -36,18 +47,22 @@
 
     <div id="flow">
       <!-- 2. what happened -->
-      <section class="step" aria-labelledby="w2">
-        <h2 id="w2">What happened?</h2>
-        <div class="chips" id="what" role="group" aria-label="What happened">
-          <button class="chip" type="button" data-k="sex" aria-pressed="true">Sex without a condom</button>
-          <button class="chip" type="button" data-k="condom" aria-pressed="false">A condom broke</button>
-          <button class="chip" type="button" data-k="unsure" aria-pressed="false">I'm not sure</button>
+      <section class="step" aria-labelledby="w2"
+               data-step="what" data-summary="{{ strings.intake.what_summary }}" data-change="{{ strings.intake.change }}"
+               data-answered-by="#what .chip[aria-pressed='true']">
+        <h2 id="w2" tabindex="-1">{{ strings.intake.what_title }}</h2>
+        <div class="step-body">
+          <div class="chips" id="what" role="group" aria-label="{{ strings.intake.what_group_aria }}">
+            <button class="chip" type="button" data-k="sex" aria-pressed="false">{{ strings.intake.what_sex }}</button>
+            <button class="chip" type="button" data-k="condom" aria-pressed="false">{{ strings.intake.what_condom }}</button>
+            <button class="chip" type="button" data-k="unsure" aria-pressed="false">{{ strings.intake.what_unsure }}</button>
+          </div>
+          <p class="status">
+            {{ strings.intake.what_else }}
+            <a href="#" data-ref="assault">{{ strings.intake.what_assault_link }}</a> &middot;
+            <a href="#" data-ref="work">{{ strings.intake.what_work_link }}</a>
+          </p>
         </div>
-        <p class="status">
-          Something else:
-          <a href="#" data-ref="assault">this was an assault</a> &middot;
-          <a href="#" data-ref="work">this happened at work</a>
-        </p>
         <div class="notice" id="ref-assault" hidden>
           <h3>{{ strings.referral.assault_title }}</h3>
           <p>{{ strings.referral.assault_body }}</p>
@@ -64,20 +79,26 @@
       </section>
 
       <!-- 3. insurance -->
-      <section class="step" aria-labelledby="w3">
-        <h2 id="w3">Do you have health insurance?</h2>
-        <p class="status" style="margin:0 0 8px">This only changes what we estimate it will cost.
-          It never changes whether you can get PEP.</p>
-        <div class="choice" role="radiogroup" aria-labelledby="w3">
-          <input type="radio" name="cov" id="cov-mh" value="masshealth">
-          <label for="cov-mh"><strong>MassHealth</strong><span>Medicaid in Massachusetts</span></label>
-          <input type="radio" name="cov" id="cov-un" value="uninsured" checked>
-          <label for="cov-un"><strong>None / rather not say</strong><span>We'll assume no coverage</span></label>
+      <section class="step" aria-labelledby="w3"
+               data-step="cov" data-summary="{{ strings.intake.cov_summary }}" data-change="{{ strings.intake.change }}"
+               data-answered-by="input[name='cov']:checked">
+        <h2 id="w3" tabindex="-1">{{ strings.intake.cov_title }}</h2>
+        <div class="step-body">
+          <p class="status" style="margin:0 0 8px">{{ strings.intake.cov_note }}</p>
+          <div class="choice" role="radiogroup" aria-labelledby="w3">
+            <input type="radio" name="cov" id="cov-mh" value="masshealth">
+            <label for="cov-mh"><strong>{{ strings.intake.cov_masshealth }}</strong><span>{{ strings.intake.cov_masshealth_sub }}</span></label>
+            <input type="radio" name="cov" id="cov-un" value="uninsured">
+            <label for="cov-un"><strong>{{ strings.intake.cov_none }}</strong><span>{{ strings.intake.cov_none_sub }}</span></label>
+          </div>
         </div>
-        <div class="chips" id="extras" role="group" aria-label="Optional">
+        <!-- Modifiers, not a question: they stay reachable once the step
+             collapses, because the campus toggles unlock sites and someone may
+             only think to use them after seeing the results. -->
+        <div class="chips inline" id="extras" role="group" aria-label="{{ strings.intake.extras_group_aria }}" data-optional>
           <button class="chip" type="button" data-x="minor" aria-pressed="false">{{ strings.minor.toggle }}</button>
-          <button class="chip" type="button" data-x="mit" aria-pressed="false">I'm MIT</button>
-          <button class="chip" type="button" data-x="harvard" aria-pressed="false">I'm Harvard</button>
+          <button class="chip" type="button" data-x="mit" aria-pressed="false">{{ strings.intake.extras_mit }}</button>
+          <button class="chip" type="button" data-x="harvard" aria-pressed="false">{{ strings.intake.extras_harvard }}</button>
         </div>
         <div class="notice" id="minor-note" hidden>
           <p>{{ strings.minor.consent }}</p>
@@ -87,25 +108,29 @@
       </section>
 
       <!-- 4. location -->
-      <section class="step" aria-labelledby="w4">
-        <h2 id="w4">Where are you?</h2>
-        <div class="row">
-          <div class="field">
-            <select id="hood" aria-label="Neighborhood">
-              <option value="">Pick a neighborhood…</option>
-              {% for group, label in [('boston','Boston'), ('adjacent','Nearby')] %}
-              <optgroup label="{{ label }}">
-                {% for n in neighborhoods if n.kind == group %}
-                <option value="{{ n.lat }},{{ n.lon }}">{{ n.name }}</option>
+      <section class="step" aria-labelledby="w4"
+               data-step="where" data-summary="{{ strings.intake.where_summary }}" data-change="{{ strings.intake.change }}"
+               data-answered-by="#hood option:checked:not([value=''])">
+        <h2 id="w4" tabindex="-1">{{ strings.intake.where_title }}</h2>
+        <div class="step-body">
+          <div class="row">
+            <div class="field">
+              <select id="hood" aria-label="{{ strings.intake.where_select_aria }}">
+                <option value="">{{ strings.intake.where_placeholder }}</option>
+                {% for group, label in [('boston', strings.intake.where_group_boston), ('adjacent', strings.intake.where_group_adjacent)] %}
+                <optgroup label="{{ label }}">
+                  {% for n in neighborhoods if n.kind == group %}
+                  <option value="{{ n.lat }},{{ n.lon }}">{{ n.name }}</option>
+                  {% endfor %}
+                </optgroup>
                 {% endfor %}
-              </optgroup>
-              {% endfor %}
-            </select>
+              </select>
+            </div>
           </div>
+          <p class="status">{{ strings.intake.where_or }} <a href="#" id="pin-mode">{{ strings.intake.where_pin_link }}</a> &mdash;
+            {{ strings.intake.where_pin_note }}</p>
+          <p class="status">{{ strings.legal.privacy_location }}</p>
         </div>
-        <p class="status">or <a href="#" id="pin-mode">drop a pin on the map</a> &mdash;
-          tap anywhere on the map to set your position.</p>
-        <p class="status">{{ strings.legal.privacy_location }}</p>
       </section>
 
       <section id="out" aria-live="polite"></section>
@@ -122,20 +147,20 @@
     </details>
   </main>
 
-  <section class="mapwrap" aria-label="Map">
+  <section class="mapwrap" aria-label="{{ strings.intake.map_aria }}">
     <div id="map"></div>
-    <div class="legend" id="legend">Tap the map to set your location</div>
+    <div class="legend" id="legend">{{ strings.intake.legend_default }}</div>
   </section>
 </div>
 
 <!-- What to say: the screen this whole product exists to deliver -->
 <div class="sheet" id="say" hidden>
   <div class="sheet-inner">
-    <button class="btn ghost small sheet-close" id="say-close" type="button">Close</button>
+    <button class="btn ghost small sheet-close" id="say-close" type="button">{{ strings.arrival.close }}</button>
     <h2>{{ strings.arrival.title }}</h2>
     <p class="status">{{ strings.arrival.lead }}</p>
     <blockquote class="script" id="say-script"></blockquote>
-    <button class="btn small" id="say-copy" type="button">Copy</button>
+    <button class="btn small" id="say-copy" type="button">{{ strings.arrival.copy }}</button>
     <p class="status">{{ strings.arrival.script_note }}</p>
     <details><summary>{{ strings.arrival.bring_title }}</summary>
       <p>{{ strings.arrival.bring_id }}</p><p>{{ strings.arrival.bring_nothing }}</p>
@@ -155,4 +180,5 @@
 <script src="{{ url_for('static', filename='js/boston-map.js') }}"></script>
 <script src="{{ url_for('static', filename='js/boston.js') }}"></script>
 <script src="{{ url_for('static', filename='js/clock.js') }}"></script>
+<script src="{{ url_for('static', filename='js/steps.js') }}"></script>
 {% endblock %}

@@ -81,7 +81,7 @@ $('#hood').addEventListener('change', e => {
 
 $('#pin-mode').addEventListener('click', e => {
   e.preventDefault();
-  $('#legend').textContent = 'Tap the map to set your location, then drag the pin to adjust';
+  $('#legend').textContent = (S.intake && S.intake.legend_pin_mode) || '';
   document.querySelector('.mapwrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 
@@ -108,7 +108,8 @@ async function refresh() {
     if (ticket !== inFlight) return;   // a newer answer already arrived
     render(data);
   } catch (err) {
-    $('#out').innerHTML = `<p class="notice">Could not reach the server.
+    const r = S.results || {};
+    $('#out').innerHTML = `<p class="notice">${esc(r.server_error || 'Could not reach the server.')}
       ${esc(S.legal ? S.legal.er_fallback : 'When in doubt, go to an emergency room.')}</p>`;
   }
 }
@@ -127,19 +128,25 @@ function warnings(r) {
 }
 
 function costLine(r) {
-  if (r.cost === 0) return 'Likely no cost to you';
-  return `Estimated cost: about $${Math.round(r.cost)}`;
+  const t = S.results || {};
+  if (r.cost === 0) return t.cost_free || 'Likely no cost to you';
+  return (t.cost_estimate || 'Estimated cost: about ${n}').replace('{n}', Math.round(r.cost));
 }
 
 function timeLine(r) {
+  const t = S.results || {};
   if (r.waits_for_opening) {
     const h = Math.round((r.opens_in_minutes || 0) / 60);
-    return `Opens at ${esc(r.opens_at)} — in about ${h} ${h === 1 ? 'hour' : 'hours'}`;
+    const tpl = h === 1
+      ? (t.opens_at_one || 'Opens at {time} — in about {n} hour')
+      : (t.opens_at_other || 'Opens at {time} — in about {n} hours');
+    return esc(tpl.replace('{time}', r.opens_at).replace('{n}', h));
   }
-  return `About ${r.minutes} min until you're seen`;
+  return esc((t.minutes_wait || "About {n} min until you're seen").replace('{n}', r.minutes));
 }
 
 function card(r, i) {
+  const t = S.results || {};
   const tel = r.phone ? 'tel:+1' + String(r.phone).replace(/\D/g, '') : null;
   const dir = `https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lon}`;
   return `<li class="res${i === 0 ? ' first' : ''}" data-id="${r.id}" tabindex="0">
@@ -147,21 +154,21 @@ function card(r, i) {
     <div>
       <h3>${esc(r.name)}</h3>
       <div class="meta">
-        ${r.is_fallback ? '<span class="badge">Always open</span>' : ''}
+        ${r.is_fallback ? `<span class="badge">${esc(t.always_open || 'Always open')}</span>` : ''}
         <span class="dist">${timeLine(r)}</span>
         <span>${esc(r.area || '')}</span>
       </div>
     </div>
     <div class="det">
-      <div><span class="k">Address · </span>${esc(r.address || '')}</div>
-      ${r.phone ? `<div><span class="k">Phone · </span><a href="${tel}">${esc(r.phone)}</a></div>` : ''}
-      <div><span class="k">Cost · </span>${esc(costLine(r))}</div>
+      <div><span class="k">${esc(t.address_label || 'Address · ')}</span>${esc(r.address || '')}</div>
+      ${r.phone ? `<div><span class="k">${esc(t.phone_label || 'Phone · ')}</span><a href="${tel}">${esc(r.phone)}</a></div>` : ''}
+      <div><span class="k">${esc(t.cost_label || 'Cost · ')}</span>${esc(costLine(r))}</div>
     </div>
     <div class="det">${warnings(r)}</div>
     <div class="acts">
-      <a class="btn small" href="${dir}" target="_blank" rel="noopener">Directions</a>
-      ${tel ? `<a class="btn ghost small" href="${tel}">Call</a>` : ''}
-      <button class="btn ghost small say" type="button" data-hours="${Math.round(state.hoursAgo)}">What to say</button>
+      <a class="btn small" href="${dir}" target="_blank" rel="noopener">${esc(t.directions || 'Directions')}</a>
+      ${tel ? `<a class="btn ghost small" href="${tel}">${esc(t.call || 'Call')}</a>` : ''}
+      <button class="btn ghost small say" type="button" data-hours="${Math.round(state.hoursAgo)}">${esc(t.what_to_say || 'What to say')}</button>
     </div>
   </li>`;
 }
@@ -169,9 +176,10 @@ function card(r, i) {
 function render(data) {
   const out = $('#out');
   state.results = data.results || [];
+  const t = S.results || {};
 
   if (data.outcome === 'OUT_OF_AREA') {
-    out.innerHTML = `<p class="notice">We only cover the Boston area right now.
+    out.innerHTML = `<p class="notice">${esc(t.out_of_area || 'We only cover the Boston area right now.')}
       <br>${esc(S.legal ? S.legal.er_fallback : '')}</p>`;
     BostonMap.update([]);
     return;
@@ -191,7 +199,7 @@ function render(data) {
   }
 
   if (!state.results.length) {
-    out.innerHTML = `<p class="notice">No site nearby can see you in time.
+    out.innerHTML = `<p class="notice">${esc(t.no_site || 'No site nearby can see you in time.')}
       ${esc(S.legal ? S.legal.er_fallback : '')}</p>`;
     return;
   }
@@ -214,8 +222,9 @@ $('#say-close').addEventListener('click', () => { $('#say').hidden = true; });
 $('#say-copy').addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText($('#say-script').textContent);
-    $('#say-copy').textContent = 'Copied';
-    setTimeout(() => { $('#say-copy').textContent = 'Copy'; }, 1500);
+    const a = S.arrival || {};
+    $('#say-copy').textContent = a.copied || 'Copied';
+    setTimeout(() => { $('#say-copy').textContent = a.copy || 'Copy'; }, 1500);
   } catch (e) { /* clipboard blocked; the text is on screen to read aloud anyway */ }
 });
 
@@ -241,6 +250,10 @@ window.addEventListener('map-select', e => {
 BostonMap.init($('#map'), (lat, lon) => {
   state.origin = { lat, lon };
   $('#hood').value = '';
-  $('#legend').textContent = 'Drag the pin to adjust your position';
+  $('#legend').textContent = (S.intake && S.intake.legend_pin_dropped) || '';
+  // Clearing #hood leaves the location step with no DOM trace of an answer,
+  // so it has to say so itself or steps.js would never let the flow advance.
+  document.dispatchEvent(new CustomEvent('rc:answered',
+    { detail: { step: 'where', value: (S.intake && S.intake.pin_answer_summary) || '' } }));
   refresh();
 });

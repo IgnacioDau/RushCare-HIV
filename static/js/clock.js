@@ -7,6 +7,10 @@
  * The Mexico module is a directory that also serves people who are not in a
  * 72-hour situation at all, so the clock only appears once someone says when
  * the exposure was.
+ *
+ * All copy comes from window.STRINGS.clock (set by boston.html / mexico.html
+ * from strings/<region>/<lang>.json) so this file never hardcodes a language
+ * — a region viewed in English must never show a Spanish sentence here.
  */
 (function () {
   const WINDOW_HOURS = 72;
@@ -15,6 +19,9 @@
   const msg = document.getElementById('when-msg');
   const expired = document.getElementById('expired');
   if (!el || !chips) return;
+
+  const C = (window.STRINGS && window.STRINGS.clock) || {};
+  const t = (key, fallback) => C[key] || fallback;
 
   let exposureHoursAgo = null;
   let startedAt = null;
@@ -28,11 +35,15 @@
   function label(h) {
     if (h >= 24) {
       const d = Math.floor(h / 24);
-      return `Te quedan aproximadamente ${d} ${d === 1 ? 'día' : 'días'} de la ventana de 72 horas.`;
+      const key = d === 1 ? 'days_left_one' : 'days_left_other';
+      const fb = d === 1
+        ? 'About 1 day left in the 72-hour window.'
+        : `About ${d} days left in the 72-hour window.`;
+      return t(key, fb).replace('{n}', d);
     }
-    if (h >= 2) return `Te quedan aproximadamente ${Math.floor(h)} horas de la ventana de 72 horas.`;
-    if (h > 0) return 'Queda menos de 2 horas de la ventana. Acude a Urgencias ahora.';
-    return 'Pasaron más de 72 horas desde la exposición.';
+    if (h >= 2) return t('hours_left', 'About {n} hours left in the 72-hour window.').replace('{n}', Math.floor(h));
+    if (h > 0) return t('urgent', 'Less than 2 hours left in the window. Go to an emergency room now.');
+    return t('expired', 'More than 72 hours have passed since the exposure.');
   }
 
   function paint() {
@@ -44,8 +55,8 @@
     if (expired) expired.hidden = h > 0;
     if (msg) {
       msg.textContent = h > 0
-        ? 'Cuanto antes empieces la PEP, mejor funciona.'
-        : 'La PEP ya no sería efectiva, pero abajo tienes qué hacer ahora.';
+        ? t('reminder_active', 'The sooner you start PEP, the better it works.')
+        : t('reminder_expired', 'PEP would no longer be effective, but there is still something you can do below.');
     }
   }
 
@@ -59,7 +70,7 @@
       exposureHoursAgo = null;
       el.hidden = true;
       if (expired) expired.hidden = true;
-      if (msg) msg.textContent = 'Buscando atención de VIH en general.';
+      if (msg) msg.textContent = t('not_exposure', '');
       return;
     }
     exposureHoursAgo = Number(raw);

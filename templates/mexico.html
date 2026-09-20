@@ -9,15 +9,19 @@
   </header>
   <main class="panel" id="panel">
 
-    <section class="step" aria-labelledby="s0">
-      <h2 id="s0">¿Cuándo fue la posible exposición?</h2>
-      <div class="chips" id="when" role="group" aria-label="Momento de la exposición">
-        <button class="chip" type="button" data-h="1" aria-pressed="false">Hace menos de 1 h</button>
-        <button class="chip" type="button" data-h="6" aria-pressed="false">Hoy</button>
-        <button class="chip" type="button" data-h="24" aria-pressed="false">Ayer</button>
-        <button class="chip" type="button" data-h="48" aria-pressed="false">Hace 2 días</button>
-        <button class="chip" type="button" data-h="90" aria-pressed="false">Hace 3 días o más</button>
-        <button class="chip" type="button" data-h="" aria-pressed="false">No es por una exposición</button>
+    <section class="step" aria-labelledby="s0"
+             data-step="when" data-summary="Cuándo" data-change="Cambiar"
+             data-answered-by="#when .chip[aria-pressed='true']">
+      <h2 id="s0" tabindex="-1">¿Cuándo fue la posible exposición?</h2>
+      <div class="step-body">
+        <div class="chips" id="when" role="group" aria-label="Momento de la exposición">
+          <button class="chip" type="button" data-h="1" aria-pressed="false">Hace menos de 1 h</button>
+          <button class="chip" type="button" data-h="6" aria-pressed="false">Hoy</button>
+          <button class="chip" type="button" data-h="24" aria-pressed="false">Ayer</button>
+          <button class="chip" type="button" data-h="48" aria-pressed="false">Hace 2 días</button>
+          <button class="chip" type="button" data-h="90" aria-pressed="false">Hace 3 días o más</button>
+          <button class="chip" type="button" data-h="" aria-pressed="false">No es por una exposición</button>
+        </div>
       </div>
       <p class="status" id="when-msg" role="status">La PEP solo funciona dentro de las 72 horas. Si no es tu caso, igual puedes buscar atención.</p>
     </section>
@@ -32,23 +36,32 @@
       </div>
     </div>
 
-    <section class="step" aria-labelledby="s1">
-      <h2 id="s1">Tu ubicación</h2>
-      <div class="row"><button class="btn" id="btn-geo" type="button">Usar mi ubicación</button></div>
-      <form class="row" id="form-loc" style="margin-top:8px" autocomplete="off">
-        <div class="field"><input id="q" name="q" type="search" list="places" placeholder="o escribe tu ciudad, colonia o estado" aria-label="Escribe tu ubicación"><datalist id="places"></datalist></div>
-        <button class="btn ghost" type="submit" id="btn-search">Buscar</button>
-      </form>
+    <section class="step" aria-labelledby="s1"
+             data-step="donde" data-summary="Dónde" data-change="Cambiar">
+      <h2 id="s1" tabindex="-1">Tu ubicación</h2>
+      <div class="step-body">
+        <div class="row"><button class="btn" id="btn-geo" type="button">Usar mi ubicación</button></div>
+        <form class="row" id="form-loc" style="margin-top:8px" autocomplete="off">
+          <div class="field"><input id="q" name="q" type="search" list="places" placeholder="o escribe tu ciudad, colonia o estado" aria-label="Escribe tu ubicación"><datalist id="places"></datalist></div>
+          <button class="btn ghost" type="submit" id="btn-search">Buscar</button>
+        </form>
+      </div>
       <p class="status" id="status" role="status">Elige tu ubicación para ver los centros a menos de 50 km.</p>
     </section>
 
-    <section class="step" aria-labelledby="s2">
-      <h2 id="s2">¿Cuentas con seguro social IMSS?</h2>
-      <div class="choice" role="radiogroup" aria-labelledby="s2">
-        <input type="radio" name="imss" id="imss-si" value="si"><label for="imss-si"><strong>Sí</strong><span>Hospitales del IMSS</span></label>
-        <input type="radio" name="imss" id="imss-no" value="no" checked><label for="imss-no"><strong>No</strong><span>Otros centros cercanos</span></label>
+    <section class="step" aria-labelledby="s2"
+             data-step="imss" data-summary="IMSS" data-change="Cambiar"
+             data-answered-by="input[name='imss']:checked">
+      <h2 id="s2" tabindex="-1">¿Cuentas con seguro social IMSS?</h2>
+      <div class="step-body">
+        <div class="choice" role="radiogroup" aria-labelledby="s2">
+          <input type="radio" name="imss" id="imss-si" value="si"><label for="imss-si"><strong>Sí</strong><span>Hospitales del IMSS</span></label>
+          <input type="radio" name="imss" id="imss-no" value="no"><label for="imss-no"><strong>No</strong><span>Otros centros cercanos</span></label>
+        </div>
       </div>
-      <div class="chips" id="chips" role="group" aria-label="Tipo de centro">
+      <!-- Filter, not a question: it stays reachable once the step collapses,
+           because it is meant to be used while reading the results. -->
+      <div class="chips inline" id="chips" role="group" aria-label="Tipo de centro" data-optional>
         <button class="chip" type="button" data-t="CAPASITS" aria-pressed="true">CAPASITS</button>
         <button class="chip" type="button" data-t="SAIH" aria-pressed="true">Hospitales SAIH</button>
       </div>
@@ -70,13 +83,12 @@
     <div id="map"></div>
     <button class="btn ghost small mapbtn" id="btn-fit" type="button">Ver todo México</button>
     <div class="legend" id="legend"></div>
-    <a class="btn ghost small maplink" id="gmlink" hidden>Ver calles en Google Maps</a>
-    <button class="btn ghost small gkey" id="btn-gkey" type="button" hidden>Usar Google Maps</button>
-    <div class="keybox" id="keybox" hidden><form id="keyform"><h2>Conecta Google Maps</h2><p>Con una clave de API de Google Cloud (Maps JavaScript API y Geocoding API habilitadas) verás el mapa de Google y buscarás por dirección exacta. Se guarda solo en este navegador. Sin clave, el mapa de calles funciona igual con OpenStreetMap.</p><div class="field"><input id="keyin" type="text" placeholder="AIza..." aria-label="Clave de API de Google Maps" autocomplete="off"></div><button class="btn" type="submit">Guardar y recargar</button><button class="btn ghost" type="button" id="keycancel">Cancelar</button><p id="keyerr" style="color:var(--hot)"></p></form></div>
+    <a class="btn ghost small maplink" id="gmlink" href="https://www.google.com/maps/@23.6345,-102.5528,5z" target="_blank" rel="noopener">Ver en Google Maps</a>
   </section>
 </div>
 
 <script>
+  window.STRINGS = {{ strings|tojson }};
   window.PEP_SCRIPT = {{ strings.arrival.script|tojson }};
   window.PEP_SCRIPT_NOTE = {{ strings.arrival.script_note|tojson }};
 </script>
@@ -84,4 +96,5 @@
 <script src="{{ url_for('static', filename='js/mapa.js') }}"></script>
 <script src="{{ url_for('static', filename='js/mexico.js') }}"></script>
 <script src="{{ url_for('static', filename='js/clock.js') }}"></script>
+<script src="{{ url_for('static', filename='js/steps.js') }}"></script>
 {% endblock %}

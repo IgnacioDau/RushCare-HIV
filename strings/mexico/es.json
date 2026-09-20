@@ -59,6 +59,16 @@
     "appointment_only": "Solo con cita. Llama primero: si no pueden atenderte hoy, Urgencias de un hospital sí puede.",
     "er_always": "Urgencias de un hospital atiende a cualquier hora, todos los días."
   },
+  "clock": {
+    "days_left_one": "Te queda aproximadamente {n} día de la ventana de 72 horas.",
+    "days_left_other": "Te quedan aproximadamente {n} días de la ventana de 72 horas.",
+    "hours_left": "Te quedan aproximadamente {n} horas de la ventana de 72 horas.",
+    "urgent": "Queda menos de 2 horas de la ventana. Acude a Urgencias ahora.",
+    "expired": "Pasaron más de 72 horas desde la exposición.",
+    "reminder_active": "Cuanto antes empieces la PEP, mejor funciona.",
+    "reminder_expired": "La PEP ya no sería efectiva, pero abajo tienes qué hacer ahora.",
+    "not_exposure": "Buscando atención de VIH en general."
+  },
   "nothing_open": {
     "title": "Ahora mismo no hay nada abierto",
     "lead": "Los CAPASITS y las unidades especializadas atienden en horario de oficina. Esto es lo que sí puedes planear.",

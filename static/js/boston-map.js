@@ -1,6 +1,7 @@
 /* Boston map: Leaflet + plain OpenStreetMap tiles, no API key.
  * (CARTO's free basemaps now require a key; OSM's standard tiles do not.
- *  Dark mode is done with a CSS filter on the tile pane, not a second tileset.)
+ *  The tiles are shown untinted — a filtered map is prettier as a page and
+ *  worse as a map, and legibility is the whole point here.)
  *
  * Reuses the tile and pin styling of the Mexico module so both regions look
  * like one product. The Google path is not offered here: Boston's coordinates
@@ -9,12 +10,6 @@
  */
 const BostonMap = (() => {
   let map, layer, userMarker, ready = null, lastResults = [], onPick = null;
-
-  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-  const isDark = () => {
-    const t = document.documentElement.getAttribute('data-theme');
-    return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  };
 
   function load() {
     if (ready) return ready;
@@ -30,16 +25,6 @@ const BostonMap = (() => {
       document.head.appendChild(s);
     });
     return ready;
-  }
-
-  let tiles;
-  function setTiles() {
-    if (tiles) map.removeLayer(tiles);
-    tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-    document.querySelector('.leaflet-tile-pane').classList.toggle('dark-tiles', isDark());
   }
 
   function pinIcon(n, cls) {
@@ -93,10 +78,11 @@ const BostonMap = (() => {
       await load();
       map = L.map(el, { zoomControl: true, minZoom: 10 }).setView([42.3467, -71.0972], 12);
       layer = L.layerGroup().addTo(map);
-      setTiles();
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
       map.on('click', e => setUser(e.latlng.lat, e.latlng.lng));
-      new MutationObserver(() => { setTiles(); paint(lastResults); })
-        .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
       new ResizeObserver(() => map.invalidateSize()).observe(el);
     },
     setUser,

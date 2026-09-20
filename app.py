@@ -50,31 +50,59 @@ REGION_LANGUAGES = {
     "mexico": ("es",),
 }
 
+LANGUAGE_NAMES = {"en": "English", "es": "Español", "ht": "Kreyòl ayisyen"}
 
-def load_strings(region: str, language: str) -> dict:
-    """Copy for one region and language, falling back to the region's first
-    language. Never falls back to another region: a Spanish speaker in Boston
-    needs Health Safety Net, one in Mexico needs derechohabiencia."""
+
+def resolve_language(region: str, language: str) -> str:
+    """The language actually served for a request: the region's first
+    language if the requested code isn't offered, or if that code's file is
+    an unreviewed machine draft (see load_strings). Callers use this — not
+    the raw requested code — for anything the user can see, such as
+    <html lang>, so the page never claims a language it didn't render."""
     languages = REGION_LANGUAGES.get(region, ("en",))
     if language not in languages:
-        language = languages[0]
+        return languages[0]
+    path = STRINGS_DIR / region / f"{language}.json"
+    if path.exists():
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if data.get("_review_status") == "machine_draft":
+            # An unreviewed machine translation of emergency health copy must
+            # not reach a user. Fall back rather than ship it.
+            return languages[0]
+    return language
+
+
+def load_strings(region: str, language: str) -> dict:
+    """Copy for one region and already-resolved language. Never falls back to
+    another region: a Spanish speaker in Boston needs Health Safety Net, one
+    in Mexico needs derechohabiencia."""
+    languages = REGION_LANGUAGES.get(region, ("en",))
     path = STRINGS_DIR / region / f"{language}.json"
     if not path.exists():
         path = STRINGS_DIR / region / f"{languages[0]}.json"
     if not path.exists():
         return {}
-    data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("_review_status") == "machine_draft":
-        # An unreviewed machine translation of emergency health copy must not
-        # reach a user. Fall back rather than ship it.
-        fallback = STRINGS_DIR / region / f"{languages[0]}.json"
-        if fallback.exists() and fallback != path:
-            return json.loads(fallback.read_text(encoding="utf-8"))
-    return data
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def requested_language(region: str) -> str:
     return request.args.get("lang") or REGION_LANGUAGES.get(region, ("en",))[0]
+
+
+def available_languages(region: str) -> list[tuple[str, str]]:
+    """Languages worth offering in a switcher: skip a language whose file is
+    an unreviewed machine draft, so nobody can pick one that silently renders
+    as English anyway (load_strings falls back for the same reason)."""
+    out = []
+    for code in REGION_LANGUAGES.get(region, ("en",)):
+        path = STRINGS_DIR / region / f"{code}.json"
+        if not path.exists():
+            continue
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if data.get("_review_status") == "machine_draft":
+            continue
+        out.append((code, LANGUAGE_NAMES.get(code, code.upper())))
+    return out
 
 
 # --------------------------------------------------------------------------- #
@@ -91,12 +119,12 @@ def home():
 
 @app.route("/boston")
 def boston():
-    language = requested_language("boston_ma")
+    language = resolve_language("boston_ma", requested_language("boston_ma"))
     return render_template(
         "boston.html",
         strings=load_strings("boston_ma", language),
         language=language,
-        languages=REGION_LANGUAGES["boston_ma"],
+        languages=available_languages("boston_ma"),
         neighborhoods=store.neighborhoods("boston_ma"),
         window_hours=PEP_WINDOW_HOURS,
     )
@@ -104,7 +132,7 @@ def boston():
 
 @app.route("/mexico")
 def mexico():
-    language = requested_language("mexico")
+    language = resolve_language("mexico", requested_language("mexico"))
     return render_template(
         "mexico.html",
         strings=load_strings("mexico", language),

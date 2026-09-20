@@ -110,7 +110,10 @@ function render() {
   }
   out.innerHTML = head + body;
   MapAdapter.update({ user: state.user, shown, context: activeUnits(), selected: state.selected, fitAll: state.fitAll });
-  $('#legend').innerHTML = state.user ? '<b style="color:var(--hot)">●</b> Tú &nbsp; <b style="color:var(--accent)">●</b> Resultados' : 'Cada punto es una unidad del directorio';
+  $('#legend').innerHTML = state.user ? '<b style="color:var(--user)">●</b> Tú &nbsp; <b style="color:var(--accent)">●</b> Resultados' : 'Cada punto es una unidad del directorio';
+  $('#gmlink').href = state.user
+    ? `https://www.google.com/maps/@${state.user.lat},${state.user.lng},13z`
+    : 'https://www.google.com/maps/@23.6345,-102.5528,5z';
 }
 function scheduleRefine(items) {
   if (!hasRefine()) return;
@@ -126,6 +129,10 @@ async function locate(q) {
 function setUser(g) {
   state.user = g; state.limit = 8; state.selected = null; state.fitAll = false;
   setStatus('Ubicación: <b>' + esc(g.label) + '</b>' + (g.precise ? '' : ' (centro de la ciudad)'));
+  // The location lives in `state`, not in any form control, so the step has to
+  // announce itself or steps.js would never let the flow advance.
+  document.dispatchEvent(new CustomEvent('rc:answered',
+    { detail: { step: 'donde', value: g.label } }));
   render();
 }
 function selectUnit(id, scroll) {
