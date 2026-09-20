@@ -1,0 +1,10 @@
+# Install inside a virtual environment, not system-wide:
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# Ubuntu and Debian block system-wide pip installs (PEP 668). That is the
+# "externally-managed-environment" error, and a venv is the intended answer.
+
+Flask>=3.0          # serves both regional modules
+requests>=2.31      # only needed by geocode_sites.py, which is run by hand

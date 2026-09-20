@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}Get PEP in Boston{% endblock %}
+{% block body %}
+<div class="app">
+  <header class="top">
+    <a class="back" href="/">&larr; Change region</a>
+    <h1>Get PEP in Boston</h1>
+    <div class="clock" id="clock" hidden></div>
+  </header>
+
+  <main class="panel" id="panel">
+
+    <!-- 1. when -->
+    <section class="step" id="step-when" aria-labelledby="w1">
+      <h2 id="w1">When was the possible exposure?</h2>
+      <div class="chips" id="when" role="group" aria-label="Time of exposure">
+        <button class="chip" type="button" data-h="0.5" aria-pressed="false">Less than an hour ago</button>
+        <button class="chip" type="button" data-h="6" aria-pressed="false">Earlier today</button>
+        <button class="chip" type="button" data-h="24" aria-pressed="false">Yesterday</button>
+        <button class="chip" type="button" data-h="48" aria-pressed="false">Two days ago</button>
+        <button class="chip" type="button" data-h="90" aria-pressed="false">Three or more days ago</button>
+      </div>
+      <p class="status" id="when-msg" role="status">PEP only works within 72 hours. The sooner the better.</p>
+    </section>
+
+    <!-- out of window -->
+    <div id="expired" hidden>
+      <div class="notice">
+        <h3>{{ strings.out_of_window.title }}</h3>
+        <p>{{ strings.out_of_window.lead }}</p>
+        <p><b>{{ strings.out_of_window.test_title }}.</b> {{ strings.out_of_window.test_timeline }}</p>
+        <p>{{ strings.out_of_window.test_where }}</p>
+        <p><b>{{ strings.out_of_window.prep_title }}.</b> {{ strings.out_of_window.prep_body }}</p>
+      </div>
+    </div>
+
+    <div id="flow">
+      <!-- 2. what happened -->
+      <section class="step" aria-labelledby="w2">
+        <h2 id="w2">What happened?</h2>
+        <div class="chips" id="what" role="group" aria-label="What happened">
+          <button class="chip" type="button" data-k="sex" aria-pressed="true">Sex without a condom</button>
+          <button class="chip" type="button" data-k="condom" aria-pressed="false">A condom broke</button>
+          <button class="chip" type="button" data-k="unsure" aria-pressed="false">I'm not sure</button>
+        </div>
+        <p class="status">
+          Something else:
+          <a href="#" data-ref="assault">this was an assault</a> &middot;
+          <a href="#" data-ref="work">this happened at work</a>
+        </p>
+        <div class="notice" id="ref-assault" hidden>
+          <h3>{{ strings.referral.assault_title }}</h3>
+          <p>{{ strings.referral.assault_body }}</p>
+          <p>{{ strings.referral.assault_no_police }}</p>
+          <p><b>{{ strings.referral.assault_barcc }}</b></p>
+          <p>{{ strings.referral.assault_rainn }}</p>
+        </div>
+        <div class="notice" id="ref-work" hidden>
+          <h3>{{ strings.referral.occupational_title }}</h3>
+          <p>{{ strings.referral.occupational_body }}</p>
+          <p>{{ strings.referral.occupational_step }}</p>
+          <p><b>{{ strings.referral.occupational_note }}</b></p>
+        </div>
+      </section>
+
+      <!-- 3. insurance -->
+      <section class="step" aria-labelledby="w3">
+        <h2 id="w3">Do you have health insurance?</h2>
+        <p class="status" style="margin:0 0 8px">This only changes what we estimate it will cost.
+          It never changes whether you can get PEP.</p>
+        <div class="choice" role="radiogroup" aria-labelledby="w3">
+          <input type="radio" name="cov" id="cov-mh" value="masshealth">
+          <label for="cov-mh"><strong>MassHealth</strong><span>Medicaid in Massachusetts</span></label>
+          <input type="radio" name="cov" id="cov-un" value="uninsured" checked>
+          <label for="cov-un"><strong>None / rather not say</strong><span>We'll assume no coverage</span></label>
+        </div>
+        <div class="chips" id="extras" role="group" aria-label="Optional">
+          <button class="chip" type="button" data-x="minor" aria-pressed="false">{{ strings.minor.toggle }}</button>
+          <button class="chip" type="button" data-x="mit" aria-pressed="false">I'm MIT</button>
+          <button class="chip" type="button" data-x="harvard" aria-pressed="false">I'm Harvard</button>
+        </div>
+        <div class="notice" id="minor-note" hidden>
+          <p>{{ strings.minor.consent }}</p>
+          <p>{{ strings.minor.notification }}</p>
+          <p><b>{{ strings.minor.billing }}</b></p>
+        </div>
+      </section>
+
+      <!-- 4. location -->
+      <section class="step" aria-labelledby="w4">
+        <h2 id="w4">Where are you?</h2>
+        <div class="row">
+          <div class="field">
+            <select id="hood" aria-label="Neighborhood">
+              <option value="">Pick a neighborhood…</option>
+              {% for group, label in [('boston','Boston'), ('adjacent','Nearby')] %}
+              <optgroup label="{{ label }}">
+                {% for n in neighborhoods if n.kind == group %}
+                <option value="{{ n.lat }},{{ n.lon }}">{{ n.name }}</option>
+                {% endfor %}
+              </optgroup>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <p class="status">or <a href="#" id="pin-mode">drop a pin on the map</a> &mdash;
+          tap anywhere on the map to set your position.</p>
+        <p class="status">{{ strings.legal.privacy_location }}</p>
+      </section>
+
+      <section id="out" aria-live="polite"></section>
+    </div>
+
+    <details class="legalbox">
+      <summary>{{ strings.legal.title }}</summary>
+      <p>{{ strings.legal.not_medical }}</p>
+      <p>{{ strings.legal.call_ahead }}</p>
+      <p>{{ strings.legal.demo_data }}</p>
+      <p><b>{{ strings.legal.er_fallback }}</b></p>
+      <p>{{ strings.legal.privacy_none }}</p>
+      <p>{{ strings.legal.privacy_shared_device }}</p>
+    </details>
+  </main>
+
+  <section class="mapwrap" aria-label="Map">
+    <div id="map"></div>
+    <div class="legend" id="legend">Tap the map to set your location</div>
+  </section>
+</div>
+
+<!-- What to say: the screen this whole product exists to deliver -->
+<div class="sheet" id="say" hidden>
+  <div class="sheet-inner">
+    <button class="btn ghost small sheet-close" id="say-close" type="button">Close</button>
+    <h2>{{ strings.arrival.title }}</h2>
+    <p class="status">{{ strings.arrival.lead }}</p>
+    <blockquote class="script" id="say-script"></blockquote>
+    <button class="btn small" id="say-copy" type="button">Copy</button>
+    <p class="status">{{ strings.arrival.script_note }}</p>
+    <details><summary>{{ strings.arrival.bring_title }}</summary>
+      <p>{{ strings.arrival.bring_id }}</p><p>{{ strings.arrival.bring_nothing }}</p>
+      <p>{{ strings.arrival.bring_timing }}</p></details>
+    <details><summary>{{ strings.arrival.expect_title }}</summary>
+      <p>{{ strings.arrival.expect_test }}</p><p>{{ strings.arrival.expect_meds }}</p>
+      <p>{{ strings.arrival.expect_cost }}</p></details>
+    <details><summary>{{ strings.arrival.rights_title }}</summary>
+      <p>{{ strings.arrival.rights_immigration }}</p><p>{{ strings.arrival.rights_emtala }}</p></details>
+    <details><summary>{{ strings.arrival.after_title }}</summary>
+      <p>{{ strings.arrival.after_adherence }}</p><p>{{ strings.arrival.after_followup }}</p>
+      <p>{{ strings.arrival.after_prep }}</p></details>
+  </div>
+</div>
+
+<script>window.STRINGS = {{ strings|tojson }};</script>
+<script src="{{ url_for('static', filename='js/boston-map.js') }}"></script>
+<script src="{{ url_for('static', filename='js/boston.js') }}"></script>
+<script src="{{ url_for('static', filename='js/clock.js') }}"></script>
+{% endblock %}

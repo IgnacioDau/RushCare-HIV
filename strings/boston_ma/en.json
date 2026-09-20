@@ -1,0 +1,87 @@
+{
+  "_comment": "All user-facing copy. Never hardcode a string in a template; look it up by key. es.json and ht.json mirror these keys exactly.",
+  "arrival": {
+    "title": "What to say when you get there",
+    "lead": "You do not need to explain anything else. This sentence is enough:",
+    "script": "I had a possible HIV exposure about {hours} hours ago and I need PEP.",
+    "script_note": "Say it at the front desk. Staff know what PEP is. You are not asking for a favour — this is standard urgent care.",
+    "bring_title": "What to bring",
+    "bring_id": "Any ID and an insurance card, if you have them. Neither is required — you cannot be turned away from an emergency room for not having them.",
+    "bring_nothing": "If you have nothing with you, go anyway. Getting there matters more.",
+    "bring_timing": "If you know the date and time of the exposure, write it down. It is the one detail they will ask for.",
+    "expect_title": "What to expect",
+    "expect_test": "They will offer an HIV test first. A positive result means PEP is not the right medication, so the test comes before the prescription.",
+    "expect_meds": "You may leave with the full 28 days, or with a few days and a follow-up appointment for the rest. Ask which one before you go home.",
+    "expect_cost": "If they mention a cost, ask about Health Safety Net and about the manufacturer assistance programme before you leave. Do not walk out over money — ask.",
+    "rights_title": "What they cannot do",
+    "rights_immigration": "No one will ask about your immigration status. It is not a requirement for PEP anywhere in the United States.",
+    "rights_emtala": "An emergency room cannot refuse to evaluate you because you have no insurance, no ID, or no money.",
+    "after_title": "After the visit",
+    "after_adherence": "Take it every day for 28 days. Missing doses is what makes PEP fail.",
+    "after_followup": "Get an HIV test again about 4 to 6 weeks after the exposure, and once more at 3 months.",
+    "after_prep": "If this may happen again, ask about PrEP — a daily medication that prevents HIV before exposure."
+  },
+  "referral": {
+    "assault_title": "There is a better path for this",
+    "assault_body": "PEP is part of it, but you are entitled to more than a prescription. A hospital with a SANE programme can provide PEP, emergency contraception, injury care and a forensic exam in one visit, usually at no cost through victim compensation.",
+    "assault_no_police": "You do not have to report to the police to get medical care. That decision is yours and you can make it later.",
+    "assault_barcc": "Boston Area Rape Crisis Center — 800-841-8371, 24 hours. They can meet you at the hospital.",
+    "assault_rainn": "RAINN national hotline — 800-656-4673.",
+    "assault_continue": "Continue to the PEP finder anyway",
+    "occupational_title": "Your employer is required to cover this",
+    "occupational_body": "For a needlestick or other exposure at work, federal OSHA rules require your employer to provide evaluation and PEP at no cost to you.",
+    "occupational_step": "Contact your occupational health or employee health department now. If it is after hours, go to your hospital's emergency room and say the exposure happened at work.",
+    "occupational_note": "The 72-hour clock still applies. Do not wait for paperwork.",
+    "occupational_continue": "Continue to the PEP finder anyway"
+  },
+  "out_of_window": {
+    "title": "It has been more than 72 hours",
+    "lead": "PEP is not effective this late, so starting it now would not protect you. That is worth knowing clearly rather than spending hours chasing it.",
+    "still_matters": "What you can do still matters.",
+    "test_title": "Get tested",
+    "test_body": "An HIV test now gives you a starting point. Tests cannot detect an infection immediately, so one test is not the whole answer.",
+    "test_timeline": "Test now, again at 4 to 6 weeks after the exposure, and once more at 3 months.",
+    "test_where": "Free and confidential testing is available across Boston. The Boston Public Health Commission can point you to a site: 617-534-5395.",
+    "symptoms_title": "If you feel unwell",
+    "symptoms_body": "Fever, rash, sore throat or swollen glands in the weeks after an exposure are worth mentioning to a clinician. They are common with many illnesses, but say the exposure happened.",
+    "prep_title": "Preventing the next one",
+    "prep_body": "PrEP is a daily medication that prevents HIV before exposure, and it is free or low cost for most people in Massachusetts. If this situation could happen again, it is the thing worth asking about.",
+    "treatment_note": "If a test does come back positive, HIV is a manageable condition with treatment, and treatment is available regardless of insurance or immigration status."
+  },
+  "warnings": {
+    "unverified": "Unverified data — call ahead before you go.",
+    "unverified_long": "We have not confirmed this site's PEP availability by phone. Hours and services may differ.",
+    "stale": "Last verified {months} months ago. Call ahead.",
+    "hsn": "This may end up costing nothing through Health Safety Net, but a bill can arrive first. Ask for a financial counsellor during your visit.",
+    "sooner_is_better": "PEP works best the sooner you take it. Waiting until this site opens is safe within your window, but going now is always the safer choice.",
+    "pharmacy_out_of_pocket": "Without insurance, you would likely pay for the full course yourself today — Health Safety Net does not apply at pharmacies.",
+    "appointment_only": "Appointment only. Call first — if they cannot see you today, an emergency room can.",
+    "er_always": "An emergency room can always see you, at any hour, with or without insurance or ID."
+  },
+  "minor": {
+    "toggle": "I am under 18",
+    "consent": "In Massachusetts you can consent to HIV and STI testing and treatment on your own. No minimum age applies and you do not need a parent's permission.",
+    "notification": "A provider would only contact a parent if they believed your life or physical safety was in danger.",
+    "billing": "One thing to know: if you use a parent's insurance, an explanation of benefits may be mailed to them showing the visit. You can ask the clinic about confidential billing, or ask about Health Safety Net instead."
+  },
+  "legal": {
+    "title": "Before you rely on this",
+    "not_medical": "This is not medical advice. It is logistics — where to go and what to say. Any decision about your treatment belongs to you and a clinician.",
+    "call_ahead": "Hours, stock and services change. Call before you travel, especially at night.",
+    "demo_data": "Site details in this version are estimates that have not been confirmed with each location.",
+    "er_fallback": "When in doubt, go to an emergency room. They are open at all hours and cannot turn you away.",
+    "privacy_title": "What we do with your information",
+    "privacy_none": "We do not store anything you enter. No accounts, no exposure history, no saved locations.",
+    "privacy_location": "Choosing a neighbourhood keeps your location on this device. If you type a street address, it is sent to OpenStreetMap to convert it into coordinates.",
+    "privacy_analytics": "We do not use advertising or tracking cookies.",
+    "privacy_shared_device": "If you are on a shared or borrowed device, close this tab when you are done."
+  },
+  "nothing_open": {
+    "title": "Nothing is open right now",
+    "lead": "No site is seeing people at this hour. Here is what you can plan.",
+    "next_opens": "The first to open is {site}, at {time}.",
+    "time_left": "You have {hours} hours left in the 72-hour window, so waiting is safe.",
+    "set_reminder": "Remind me when it opens",
+    "urgency": "If you would rather not wait, an emergency room sees people at any hour."
+  }
+}

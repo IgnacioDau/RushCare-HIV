@@ -1,0 +1,107 @@
+{
+  "_comment": "DRAFT — NOT REVIEWED BY A HAITIAN CREOLE SPEAKER. DO NOT SHIP.",
+  "_review_status": "machine_draft",
+  "_warning": "This is emergency health copy. A mistranslation here reaches someone in crisis with hours on a clock. Every string must be reviewed by a native Haitian Creole speaker, ideally one familiar with health services in Boston, before this file is served to any user. Until then the app must fall back to en.json. Priority for review: arrival.script, warnings.*, and the whole out_of_window section.",
+  "_review_contacts": "Possible reviewers: Haitian community health workers at Codman Square, Bowdoin Street or Mattapan CHC; Boston Public Health Commission language access staff; MIT/Harvard Haitian student associations.",
+
+  "arrival": {
+    "title": "Kisa pou w di lè w rive",
+    "lead": "Ou pa bezwen eksplike anyen plis. Fraz sa a ase:",
+    "script": "I had a possible HIV exposure about {hours} hours ago and I need PEP.",
+    "script_note": "Di l nan resepsyon an, an anglè. Anplwaye yo konnen kisa PEP ye. Ou pa ap mande yon favè — sa a se swen ijan nòmal.",
+
+    "bring_title": "Kisa pou w pote",
+    "bring_id": "Nenpòt idantifikasyon ak kat asirans ou, si w genyen yo. Ni youn ni lòt pa obligatwa — yo pa gen dwa refize w nan yon sal dijans paske w pa gen yo.",
+    "bring_nothing": "Si w pa gen anyen sou ou, ale kanmenm. Rive a pi enpòtan.",
+    "bring_timing": "Si w konnen dat ak lè ekspozisyon an, ekri l. Se sèl detay yo pral mande w.",
+
+    "expect_title": "Kisa ki pral pase",
+    "expect_test": "Y ap ofri w yon tès VIH anvan. Si rezilta a pozitif, PEP pa bon medikaman an, se poutèt sa tès la vini anvan preskripsyon an.",
+    "expect_meds": "Ou ka soti ak tout 28 jou yo, oswa ak kèk jou ak yon randevou pou rès la. Mande kilès nan de a anvan w ale lakay ou.",
+    "expect_cost": "Si yo pale de yon pri, mande pou Health Safety Net ak pou pwogram asistans konpayi an anvan w soti. Pa ale poutèt lajan — mande.",
+
+    "rights_title": "Sa yo pa gen dwa fè",
+    "rights_immigration": "Pèsonn pa ap mande w sou sitiyasyon imigrasyon w. Se pa yon kondisyon pou PEP okenn kote Ozetazini.",
+    "rights_emtala": "Yon sal dijans pa gen dwa refize evalye w paske w pa gen asirans, idantifikasyon oswa lajan.",
+
+    "after_title": "Apre vizit la",
+    "after_adherence": "Pran l chak jou pandan 28 jou. Lè w sote dòz se sa ki fè PEP echwe.",
+    "after_followup": "Fè yon lòt tès VIH apeprè 4 a 6 semèn apre ekspozisyon an, epi yon lòt nan 3 mwa.",
+    "after_prep": "Si sa ka rive ankò, mande sou PrEP — yon medikaman chak jou ki anpeche VIH anvan ekspozisyon."
+  },
+
+  "referral": {
+    "assault_title": "Gen yon pi bon chemen pou sa",
+    "assault_body": "PEP fè pati de li, men ou gen dwa a plis pase yon preskripsyon. Yon lopital ki gen yon pwogram SANE ka ba w PEP, kontrasepsyon dijans, swen pou blesi ak yon egzamen legal nan yon sèl vizit, anjeneral san pri.",
+    "assault_no_police": "Ou pa oblije fè rapò bay lapolis pou w jwenn swen medikal. Desizyon sa a se pa w, epi ou ka pran l pita.",
+    "assault_barcc": "Boston Area Rape Crisis Center — 800-841-8371, 24 sou 24. Yo ka rankontre w nan lopital la.",
+    "assault_rainn": "Liy nasyonal RAINN — 800-656-4673.",
+    "assault_continue": "Kontinye kanmenm nan chèche PEP",
+
+    "occupational_title": "Anplwayè w oblije kouvri sa",
+    "occupational_body": "Pou yon piki zegwi oswa lòt ekspozisyon nan travay, règleman federal OSHA oblije anplwayè w ba w evalyasyon an ak PEP san okenn pri pou ou.",
+    "occupational_step": "Kontakte sèvis sante nan travay ou kounye a. Si se apre lè, ale nan sal dijans lopital ou a epi di ekspozisyon an te rive nan travay.",
+    "occupational_note": "Revèy 72 èdtan an ap mache toujou. Pa tann papye.",
+    "occupational_continue": "Kontinye kanmenm nan chèche PEP"
+  },
+
+  "out_of_window": {
+    "title": "Plis pase 72 èdtan gentan pase",
+    "lead": "PEP pa efikas si lontan konsa, kidonk kòmanse l kounye a pa ta pwoteje w. Li pi bon pou w konnen sa klè pase pou w pase èdtan ap chèche l.",
+    "still_matters": "Sa ou ka fè toujou gen enpòtans.",
+
+    "test_title": "Fè tès la",
+    "test_body": "Yon tès VIH kounye a ba w yon pwen depa. Tès yo pa ka detekte yon enfeksyon touswit, kidonk yon sèl tès pa tout repons lan.",
+    "test_timeline": "Fè tès kounye a, yon lòt 4 a 6 semèn apre ekspozisyon an, epi yon lòt nan 3 mwa.",
+    "test_where": "Gen tès gratis ak konfidansyèl toupatou nan Boston. Boston Public Health Commission ka montre w kote: 617-534-5395.",
+
+    "symptoms_title": "Si w pa santi w byen",
+    "symptoms_body": "Lafyèv, bouton, gòj fè mal oswa gangliyon anfle nan semèn apre yon ekspozisyon se rezon pou pale ak yon doktè. Yo komen nan anpil maladi, men di ekspozisyon an te rive.",
+
+    "prep_title": "Anpeche pwochen an",
+    "prep_body": "PrEP se yon medikaman chak jou ki anpeche VIH anvan ekspozisyon, epi li gratis oswa pa chè pou pifò moun nan Massachusetts. Si sitiyasyon sa a ka rive ankò, se sa ki vo lapenn mande.",
+
+    "treatment_note": "Si yon tès ta vin pozitif, VIH se yon kondisyon ou ka jere ak tretman, epi tretman disponib kèlkeswa asirans ou oswa sitiyasyon imigrasyon w."
+  },
+
+  "warnings": {
+    "unverified": "Enfòmasyon ki pa verifye — rele anvan w ale.",
+    "unverified_long": "Nou pa konfime pa telefòn ke kote sa a ofri PEP. Orè ak sèvis yo ka diferan.",
+    "stale": "Verifye gen {months} mwa. Rele anvan w ale.",
+    "hsn": "Sa ka fini pa pa koute anyen atravè Health Safety Net, men yon fakti ka rive anvan. Mande pou yon konseye finansye pandan vizit la.",
+    "sooner_is_better": "PEP travay pi byen pi vit ou pran l. Tann jiskaske kote sa a louvri san danje nan fenèt ou a, men ale kounye a toujou pi an sekirite.",
+    "pharmacy_out_of_pocket": "San asirans, ou ta gen pou peye tout tretman an ak pwòp lajan w jodi a — Health Safety Net pa aplike nan famasi.",
+    "appointment_only": "Sèlman ak randevou. Rele anvan — si yo pa ka wè w jodi a, yon sal dijans kapab.",
+    "er_always": "Yon sal dijans ka toujou wè w, nenpòt lè, ak oswa san asirans oswa idantifikasyon."
+  },
+
+  "nothing_open": {
+    "title": "Pa gen anyen ki louvri kounye a",
+    "lead": "Nan lè sa a pa gen okenn kote k ap resevwa moun. Men sa ou ka planifye.",
+    "next_opens": "Premye a k ap louvri se {site}, a {time}.",
+    "time_left": "Ou gen {hours} èdtan ki rete nan fenèt 72 èdtan an, kidonk tann san danje.",
+    "set_reminder": "Fè m sonje lè l louvri",
+    "urgency": "Si w pito pa tann, yon sal dijans resevwa moun nenpòt lè."
+  },
+
+  "minor": {
+    "toggle": "Mwen gen mwens pase 18 an",
+    "consent": "Nan Massachusetts ou ka konsanti poukont ou pou tès ak tretman VIH ak IST. Pa gen laj minimòm epi ou pa bezwen pèmisyon paran w.",
+    "notification": "Yon pwofesyonèl ta kontakte yon paran sèlman si li te kwè lavi w oswa sekirite fizik ou an danje.",
+    "billing": "Yon bagay pou w konnen: si w sèvi ak asirans paran w, yo ka resevwa yon eksplikasyon benefis nan lapòs ki montre vizit la. Ou ka mande klinik la sou fakti konfidansyèl, oswa mande sou Health Safety Net."
+  },
+
+  "legal": {
+    "title": "Anvan w konte sou sa",
+    "not_medical": "Sa a se pa konsèy medikal. Se lojistik — ki kote pou ale ak kisa pou di. Nenpòt desizyon sou tretman w se pou ou ak yon pwofesyonèl sante.",
+    "call_ahead": "Orè, stock ak sèvis chanje. Rele anvan w pati, sitou lannwit.",
+    "demo_data": "Detay sou kote yo nan vèsyon sa a se estimasyon ki pa konfime ak chak kote.",
+    "er_fallback": "Si w pa sèten, ale nan yon sal dijans. Yo louvri tout lè epi yo pa ka refize w.",
+
+    "privacy_title": "Kisa nou fè ak enfòmasyon w",
+    "privacy_none": "Nou pa konsève anyen ou antre. Pa gen kont, pa gen istwa ekspozisyon, pa gen kote ki anrejistre.",
+    "privacy_location": "Chwazi yon katye kenbe kote w ye a sou aparèy sa a. Si w ekri yon adrès, li voye bay OpenStreetMap pou konvèti l an kowòdone.",
+    "privacy_analytics": "Nou pa sèvi ak cookies piblisite oswa swivi.",
+    "privacy_shared_device": "Si w sou yon aparèy pataje oswa prete, fèmen onglè sa a lè w fini."
+  }
+}

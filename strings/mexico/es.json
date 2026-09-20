@@ -1,0 +1,89 @@
+{
+  "_comment": "Spanish copy for the mexico region. Same key set as boston_ma, different content: no Health Safety Net, no EMTALA, no MassHealth. Reviewed content pending: see _review_notes.",
+  "_review_notes": "Written by Claude, not by a Mexican health worker. Two claims need confirmation before the demo: (1) that IMSS Urgencias provides PEP for non-occupational sexual exposure — supported by IMSS public campaigns but not by a clinical guideline; (2) whether that applies to people who are not derechohabientes. IMSS's own bulletin refers to derechohabientes; the broader claim comes from AHF. If (2) turns out to be false, arrival.rights_coverage must be rewritten.",
+  "arrival": {
+    "title": "Qué decir cuando llegues",
+    "lead": "No hace falta que expliques nada más. Con esta frase alcanza:",
+    "script": "Tuve una posible exposición al VIH hace unas {hours} horas y necesito PEP, profilaxis post-exposición.",
+    "script_note": "Dilo en el módulo de admisión o en Urgencias. Si te preguntan por qué, basta con decir que fue una exposición de riesgo: no tienes que dar detalles.",
+    "bring_title": "Qué llevar",
+    "bring_id": "Identificación oficial y, si eres derechohabiente, tu número de seguridad social o tu carnet. Si no los tienes a la mano, ve igual.",
+    "bring_nothing": "Si no traes nada, preséntate de todos modos. Llegar dentro de las 72 horas importa más que el papeleo.",
+    "bring_timing": "Anota la fecha y la hora de la exposición. Es el dato que te van a pedir para decidir si la PEP todavía aplica.",
+    "expect_title": "Qué va a pasar",
+    "expect_test": "Primero te harán una prueba de VIH. Si sale positiva, la PEP no es el medicamento indicado, y por eso la prueba va antes.",
+    "expect_meds": "Puede que salgas con el tratamiento completo de 28 días, o con unos días y una cita para el resto. Pregunta cuál de las dos antes de irte.",
+    "expect_cost": "La PEP en el sistema público es gratuita. Si te mencionan un cobro, pregunta por el CAPASITS de tu estado antes de pagar nada.",
+    "rights_title": "Qué no te pueden hacer",
+    "rights_coverage": "El IMSS difunde la PEP como atención de urgencia dentro de las primeras 72 horas. Si te dicen que no eres derechohabiente, pide que lo confirmen con el responsable del programa de VIH y pregunta por el CAPASITS de tu estado, que atiende sin importar tu afiliación.",
+    "rights_discrimination": "Negarte la atención por tu orientación sexual, tu identidad de género o por el motivo de la exposición es discriminación. Puedes denunciarlo ante CONAPRED.",
+    "after_title": "Después de la visita",
+    "after_adherence": "Tómala todos los días durante 28 días. Saltarse dosis es lo que hace que la PEP falle.",
+    "after_followup": "Hazte otra prueba de VIH entre 4 y 6 semanas después de la exposición, y una más a los 3 meses.",
+    "after_prep": "Si esto puede volver a pasar, pregunta por la PrEP: un medicamento diario que previene el VIH antes de la exposición. Está disponible en el sistema público."
+  },
+  "referral": {
+    "assault_title": "Para esto hay un camino mejor",
+    "assault_body": "La PEP es parte, pero te corresponde más que un medicamento. En un Centro de Justicia para las Mujeres o en la Fiscalía, el personal está obligado a darte opciones y a apoyarte para que recibas PEP, atención médica y acompañamiento psicológico, además de anticoncepción de emergencia.",
+    "assault_no_police": "La atención médica no depende de que denuncies. Puedes recibir PEP en un hospital sin presentar denuncia, y decidir después.",
+    "assault_barcc": "Línea nacional contra la violencia hacia las mujeres: 800 822 4460, las 24 horas.",
+    "assault_rainn": "Si no recibes la atención que marca la ley, AHF México puede orientarte.",
+    "assault_continue": "Continuar igual al buscador de PEP",
+    "occupational_title": "Esto lo cubre tu institución",
+    "occupational_body": "Si fue un pinchazo o contacto con sangre en tu trabajo de salud, existe una guía del IMSS para exposición laboral y tu unidad está obligada a darte atención inmediata y el medicamento sin costo.",
+    "occupational_step": "Repórtalo ahora en tu unidad y acude a Urgencias del hospital o clínica que te quede más cerca. Di que fue una exposición laboral.",
+    "occupational_note": "El reloj de 72 horas sigue corriendo. No esperes a que se termine el reporte del accidente.",
+    "occupational_continue": "Continuar igual al buscador de PEP"
+  },
+  "out_of_window": {
+    "title": "Pasaron más de 72 horas",
+    "lead": "La PEP ya no es efectiva a esta altura, así que empezarla ahora no te protegería. Vale más saberlo con claridad que pasar horas buscándola.",
+    "still_matters": "Lo que sí puedes hacer sigue importando.",
+    "test_title": "Hazte la prueba",
+    "test_body": "Una prueba de VIH ahora te da un punto de partida. Las pruebas no detectan la infección de inmediato, así que una sola prueba no es toda la respuesta.",
+    "test_timeline": "Hazte la prueba ahora, otra entre 4 y 6 semanas después de la exposición, y una más a los 3 meses.",
+    "test_where": "Los CAPASITS hacen pruebas gratuitas y confidenciales, sin importar si tienes seguridad social. También puedes escribir al chat VIHrtual del IMSS: 55 4558 0603.",
+    "symptoms_title": "Si te sientes mal",
+    "symptoms_body": "Fiebre, salpullido, dolor de garganta o ganglios inflamados en las semanas siguientes a una exposición son motivo para ir al médico. Son comunes en muchas enfermedades, pero menciona que hubo una exposición.",
+    "prep_title": "Prevenir la próxima",
+    "prep_body": "La PrEP es un medicamento diario que previene el VIH antes de la exposición y está disponible gratis en el sistema público. Si esta situación puede repetirse, es lo que vale la pena preguntar.",
+    "treatment_note": "Si una prueba llegara a salir positiva, el VIH es una condición manejable con tratamiento, y el tratamiento antirretroviral es gratuito en México para cualquier persona, con o sin seguridad social."
+  },
+  "warnings": {
+    "unverified": "Datos sin verificar: llama antes de ir.",
+    "unverified_long": "No confirmamos por teléfono que esta unidad ofrezca PEP. Los horarios y servicios pueden ser distintos.",
+    "stale": "Verificado hace {months} meses. Llama antes de ir.",
+    "coverage": "Asumimos que Urgencias atiende a cualquier persona dentro de las 72 horas. Si te dicen que necesitas ser derechohabiente, pregunta por el CAPASITS de tu estado.",
+    "sooner_is_better": "La PEP funciona mejor cuanto antes la tomes. Esperar a que esta unidad abra es seguro dentro de tu ventana, pero ir ahora siempre es lo más seguro.",
+    "distance": "Esta unidad está a {km} km. Si el traslado te toma más de lo previsto, busca Urgencias de un hospital más cercano.",
+    "appointment_only": "Solo con cita. Llama primero: si no pueden atenderte hoy, Urgencias de un hospital sí puede.",
+    "er_always": "Urgencias de un hospital atiende a cualquier hora, todos los días."
+  },
+  "nothing_open": {
+    "title": "Ahora mismo no hay nada abierto",
+    "lead": "Los CAPASITS y las unidades especializadas atienden en horario de oficina. Esto es lo que sí puedes planear.",
+    "next_opens": "La primera en abrir es {site}, a las {time}.",
+    "time_left": "Te quedan {hours} horas de la ventana de 72 horas, así que esperar es seguro.",
+    "set_reminder": "Recordarme cuando abra",
+    "urgency": "Si prefieres no esperar, Urgencias de un hospital atiende a cualquier hora."
+  },
+  "minor": {
+    "toggle": "Tengo menos de 18 años",
+    "consent": "Tienes derecho a la protección de tu salud y a recibir atención. En la práctica, algunas unidades piden que te acompañe una persona adulta: si te lo piden, pregunta por el responsable del programa de VIH o acude a un CAPASITS.",
+    "notification": "La información sobre tu salud es confidencial. Si algo de esto te preocupa, dilo al llegar y pregunta cómo manejan la confidencialidad.",
+    "billing": "La atención en el sistema público es gratuita, así que no hay un cobro que pueda llegarle a alguien más."
+  },
+  "legal": {
+    "title": "Antes de guiarte por esto",
+    "not_medical": "Esto no es consejo médico. Es logística: a dónde ir y qué decir. Cualquier decisión sobre tu tratamiento es tuya y de un profesional de salud.",
+    "call_ahead": "Los horarios, el abasto y los servicios cambian. Llama antes de salir, sobre todo de noche.",
+    "demo_data": "Los datos de contacto vienen del directorio oficial de CENSIDA (marzo de 2026). La disponibilidad de PEP, los tiempos de espera y los costos son estimaciones nuestras, no confirmadas con cada unidad.",
+    "er_fallback": "Ante la duda, acude a Urgencias del hospital público más cercano.",
+    "privacy_title": "Qué hacemos con tu información",
+    "privacy_none": "No guardamos nada de lo que escribas. Sin cuentas, sin historial de exposiciones, sin ubicaciones guardadas.",
+    "privacy_location": "Elegir un estado o municipio mantiene tu ubicación en este dispositivo. Si escribes una dirección, se envía a OpenStreetMap para convertirla en coordenadas.",
+    "privacy_analytics": "No usamos cookies de publicidad ni de rastreo.",
+    "privacy_shared_device": "Si estás en un dispositivo compartido o prestado, cierra esta pestaña cuando termines.",
+    "assumption_imss": "Asumimos que Urgencias del IMSS atiende a cualquier persona dentro de las 72 horas, con base en sus campañas públicas. Queda por confirmar si aplica también a quienes no son derechohabientes. Si te rechazan, un CAPASITS atiende sin importar tu afiliación."
+  }
+}

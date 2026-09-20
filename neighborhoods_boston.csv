@@ -1,0 +1,31 @@
+id,name,kind,lat,lon,region,coordinate_precision
+allston,Allston,boston,42.3539,-71.1337,boston_ma,approximate_centroid
+back_bay,Back Bay,boston,42.3503,-71.081,boston_ma,approximate_centroid
+bay_village,Bay Village,boston,42.3494,-71.0685,boston_ma,approximate_centroid
+beacon_hill,Beacon Hill,boston,42.3588,-71.0707,boston_ma,approximate_centroid
+brighton,Brighton,boston,42.3464,-71.156,boston_ma,approximate_centroid
+charlestown,Charlestown,boston,42.3782,-71.0602,boston_ma,approximate_centroid
+chinatown,Chinatown / Leather District,boston,42.3515,-71.0621,boston_ma,approximate_centroid
+dorchester,Dorchester,boston,42.2988,-71.0662,boston_ma,approximate_centroid
+downtown,Downtown,boston,42.3557,-71.0572,boston_ma,approximate_centroid
+east_boston,East Boston,boston,42.3702,-71.0389,boston_ma,approximate_centroid
+fenway,Fenway / Kenmore,boston,42.3467,-71.0972,boston_ma,approximate_centroid
+hyde_park,Hyde Park,boston,42.2565,-71.1247,boston_ma,approximate_centroid
+jamaica_plain,Jamaica Plain,boston,42.3097,-71.1151,boston_ma,approximate_centroid
+longwood,Longwood,boston,42.3377,-71.1041,boston_ma,approximate_centroid
+mattapan,Mattapan,boston,42.277,-71.092,boston_ma,approximate_centroid
+mission_hill,Mission Hill,boston,42.3298,-71.1039,boston_ma,approximate_centroid
+north_end,North End,boston,42.3647,-71.0542,boston_ma,approximate_centroid
+roslindale,Roslindale,boston,42.2868,-71.1245,boston_ma,approximate_centroid
+roxbury,Roxbury,boston,42.3152,-71.0914,boston_ma,approximate_centroid
+south_boston,South Boston,boston,42.3336,-71.0431,boston_ma,approximate_centroid
+seaport,Seaport / South Boston Waterfront,boston,42.351,-71.043,boston_ma,approximate_centroid
+south_end,South End,boston,42.3388,-71.0765,boston_ma,approximate_centroid
+west_end,West End,boston,42.3644,-71.0661,boston_ma,approximate_centroid
+west_roxbury,West Roxbury,boston,42.2798,-71.1627,boston_ma,approximate_centroid
+cambridge_central,Cambridge - Central Square,adjacent,42.3654,-71.1037,boston_ma,approximate_centroid
+cambridge_kendall,Cambridge - Kendall / MIT,adjacent,42.3623,-71.0862,boston_ma,approximate_centroid
+cambridge_harvard,Cambridge - Harvard Square,adjacent,42.3736,-71.119,boston_ma,approximate_centroid
+somerville,Somerville,adjacent,42.3876,-71.0995,boston_ma,approximate_centroid
+brookline,Brookline,adjacent,42.3318,-71.1212,boston_ma,approximate_centroid
+chelsea,Chelsea,adjacent,42.3918,-71.0328,boston_ma,approximate_centroid

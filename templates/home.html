@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}PEP finder{% endblock %}
+{% block body %}
+<div class="home">
+  <header class="home-head">
+    <h1>Get PEP</h1>
+    <p class="lead">HIV prevention medication that works if you start it within 72 hours
+      of a possible exposure. Pick where you are.</p>
+  </header>
+  <div class="regions">
+    <a class="region" href="/boston">
+      <h2>Boston, Massachusetts</h2>
+      <p>Finds the fastest and cheapest place open right now, and tells you what to say
+        when you get there.</p>
+      <span class="go">Start &rarr;</span>
+    </a>
+    <a class="region" href="/mexico">
+      <h2>México</h2>
+      <p>Encuentra centros CAPASITS, hospitales SAIH y hospitales del IMSS cerca de ti.
+        La PEP es gratuita en el sistema público.</p>
+      <span class="go">Empezar &rarr;</span>
+    </a>
+  </div>
+  <p class="home-note">
+    Not medical advice. If you cannot decide, go to a hospital emergency room &mdash;
+    they are open at all hours and cannot turn you away.<br>
+    <span lang="es">Esto no es consejo médico. Ante la duda, acude a Urgencias.</span>
+  </p>
+</div>
+{% endblock %}

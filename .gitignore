@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+pep.db
+.geocode_cache.json
+sites_mexico_placeholder.csv
